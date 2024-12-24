@@ -16,11 +16,11 @@ public class DatabaseUtil {
 //	spring.datasource-data.password=1234
 //	spring.datasource-data.driver-class-name=org.mariadb.jdbc.Driver
 
-	private static Connection connection;
+	private Connection connection;
 
-	public static Connection getConnection() throws Exception {
+	public Connection getConnection() throws Exception {
 
-		if (connection != null) {
+		if (connection == null) {
 			String url = "jdbc:mariadb://neobns.com:13306/db2";
 			String userName = "POC_USER";
 			String password = "1234";
@@ -31,11 +31,13 @@ public class DatabaseUtil {
 		return connection;
 	}
 
-	public static List<LogDTO> getSlowList(int page, int size) throws Exception {
+	public List<LogDTO> getSlowList(int page, int size) throws Exception {
 
 		int offset = (page - 1) * size;
 
 		String sql = "SELECT * FROM logging_slow " + "WHERE 1=1 " + "ORDER BY timestmp " + "LIMIT " + size + "OFFSET "+ offset;
+		
+		connection = getConnection();
 		
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		ResultSet resultSet = preparedStatement.executeQuery();
@@ -47,6 +49,8 @@ public class DatabaseUtil {
 			logDTO.setCallerClass(resultSet.getString("caller_class"));
 			logDTO.setCallerMethod(resultSet.getString("caller_method"));
 			logDTO.setUserId(resultSet.getString("user_id"));
+			logDTO.setQuery(resultSet.getString("query"));
+			logDTO.setUri(resultSet.getString("uri"));
 			logDTO.setTraceId(resultSet.getString("trace_id"));
 			logDTO.setExecuteResult(resultSet.getString("execute_result"));
 			list.add(logDTO);	
@@ -55,12 +59,14 @@ public class DatabaseUtil {
 		return list;
 	}
 
-	public static List<LogDTO> getLogList(String traceId) {
+	public List<LogDTO> getLogList(String traceId) throws Exception {
 
 		String sql = "SELECT * FROM logging_event " + "WHERE trace_id = " + traceId
 				+ "AND logger_name IN ('TRACE', 'SLOW', 'ERROR') " + "ORDER BY timestmp";
 
 		List<LogDTO> list = new ArrayList<LogDTO>();
+		
+		connection = getConnection();
 
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);

@@ -37,11 +37,7 @@
 		                    </span>
 		                    <span th:unless="${log.traceId != null}">N/A</span>
 		                </td>
-		                <!-- IP주소 -->
-		                <td class="text-start ip-address">
-		                	<span th:if="${log.ipAddress != null}" th:text="${log.ipAddress}"></span>
-		                    <span th:unless="${log.ipAddress != null}">N/A</span>
-		                </td>
+		                
 		                <!-- 종류 -->
 						<td>
 							<span th:if="${log.callerClass == 'SQL'}" th:text="${log.callerClass}"></span>

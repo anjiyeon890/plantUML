@@ -25,7 +25,7 @@ public class SlowServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("loglist", list);
-		request.getRequestDispatcher("/template/index.html").forward(request, response);	
+//		request.getRequestDispatcher("/template/index.html").forward(request, response);	
 	}
 	
 }
