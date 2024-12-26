@@ -1,12 +1,10 @@
 package com.neo.plantUMLServer.dto;
 
-import org.apache.ibatis.type.Alias;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Alias("LogDTO")
+
 @Getter
 @Setter
 @ToString

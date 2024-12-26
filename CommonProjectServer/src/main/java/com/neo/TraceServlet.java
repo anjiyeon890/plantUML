@@ -10,14 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 @WebServlet("/trace")
 public class TraceServlet extends HttpServlet {
 
+	private ApplicationContext applicationContext;
 	private final DatabaseUtil databaseUtil = new DatabaseUtil();
+
+//	@Override
+//	public void init() throws ServletException {
+//		
+//		applicationContext = new AnnotationConfigApplicationContext()
+//	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String traceId = (String) request.getParameter("traceId");
 		System.out.println("TRACE ID : " + traceId);
 		List<LogDTO> list = null;

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/")
 public class SlowServlet extends HttpServlet {
-	
+
 	private final DatabaseUtil databaseUtil = new DatabaseUtil(); 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

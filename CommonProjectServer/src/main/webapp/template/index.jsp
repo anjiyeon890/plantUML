@@ -11,6 +11,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+
+	<%-- <div style="justify-items: center; justify-content: center;" id="plantuml-container">
+        <uml>
+            <%= request.getAttribute("imgSource") != null ? request.getAttribute("imgSource") : "" %>
+        </uml>
+    </div>
+
+    <script>
+        $("uml").each(function() {
+            var src = "//www.plantuml.com/plantuml/img/" + window.plantumlEncoder.encode($(this).text());
+            $(this).replaceWith($('<img style="display:flex; justify-content:center; width: 100%;">').attr('src', src));
+        });
+
+        const plantumlContainer = document.getElementById("plantuml-container");
+    </script> --%>
+
+
     <table class="table table-striped table-centered">
         <thead>
             <tr>
