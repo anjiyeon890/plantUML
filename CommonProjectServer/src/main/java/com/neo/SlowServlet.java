@@ -3,6 +3,7 @@ package com.neo;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +26,11 @@ public class SlowServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("loglist", list);
-//		request.getRequestDispatcher("/template/index.html").forward(request, response);	
+		
+		String url = "/template/index.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+		dispatcher.forward(request, response);
+		
 	}
 	
 }

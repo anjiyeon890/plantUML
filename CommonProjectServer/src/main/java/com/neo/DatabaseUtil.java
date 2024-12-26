@@ -23,7 +23,7 @@ public class DatabaseUtil {
 		if (connection == null) {
 			String url = "jdbc:mariadb://neobns.com:13306/db2";
 			String userName = "POC_USER";
-			String password = "1234";
+			String password = "neobns1!";
 			Class.forName("org.mariadb.jdbc.Driver");
 			connection = DriverManager.getConnection(url, userName, password);
 		}
@@ -35,7 +35,7 @@ public class DatabaseUtil {
 
 		int offset = (page - 1) * size;
 
-		String sql = "SELECT * FROM logging_slow " + "WHERE 1=1 " + "ORDER BY timestmp " + "LIMIT " + size + "OFFSET "+ offset;
+		String sql = "SELECT * FROM logging_slow " + "WHERE 1=1 " + "ORDER BY timestmp " + "LIMIT " + size + " OFFSET "+ offset;
 		
 		connection = getConnection();
 		
@@ -59,10 +59,12 @@ public class DatabaseUtil {
 		return list;
 	}
 
-	public List<LogDTO> getLogList(String traceId) throws Exception {
+	public List<LogDTO> getTraceList(String traceId) throws Exception {
 
-		String sql = "SELECT * FROM logging_event " + "WHERE trace_id = " + traceId
-				+ "AND logger_name IN ('TRACE', 'SLOW', 'ERROR') " + "ORDER BY timestmp";
+		String sql = "SELECT * FROM logging_event " + "WHERE trace_id = '" + traceId
+				+ "' AND logger_name IN ('TRACE', 'SLOW', 'ERROR') " + "ORDER BY timestmp";
+		
+		System.out.println(sql);
 
 		List<LogDTO> list = new ArrayList<LogDTO>();
 		
@@ -75,11 +77,11 @@ public class DatabaseUtil {
 			while (resultSet.next()) {
 				LogDTO logDTO = new LogDTO();
 				logDTO.setTimestmp(resultSet.getString("timestmp"));
+				logDTO.setTraceId(resultSet.getString("trace_id"));
+				logDTO.setUserId(resultSet.getString("user_id"));
 				logDTO.setLevelString(resultSet.getString("level_string"));
 				logDTO.setCallerClass(resultSet.getString("caller_class"));
-				logDTO.setCallerMethod(resultSet.getString("caller_method"));
-				logDTO.setUserId(resultSet.getString("user_id"));
-				logDTO.setTraceId(resultSet.getString("trace_id"));
+				logDTO.setCallerMethod(resultSet.getString("caller_method"));		
 				logDTO.setExecuteResult(resultSet.getString("execute_result"));
 				list.add(logDTO);
 			}
@@ -88,6 +90,8 @@ public class DatabaseUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		System.out.println(list.get(0).toString());
 
 		return list;
 
