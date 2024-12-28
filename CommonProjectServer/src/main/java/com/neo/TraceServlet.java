@@ -10,20 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import com.neo.plantUMLServer.dto.LogDTO;
+import com.neo.plantUMLServer.service.TraceUmlService;
 
 @WebServlet("/trace")
 public class TraceServlet extends HttpServlet {
 
-	private ApplicationContext applicationContext;
 	private final DatabaseUtil databaseUtil = new DatabaseUtil();
-
-//	@Override
-//	public void init() throws ServletException {
-//		
-//		applicationContext = new AnnotationConfigApplicationContext()
-//	}
+	private TraceUmlService traceUmlSevice;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -34,12 +28,16 @@ public class TraceServlet extends HttpServlet {
 
 		try {
 			list = databaseUtil.getTraceList(traceId);
+			System.out.println(list.get(0).toString());
 			System.out.println("trace method activated");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+		String plantUml = traceUmlSevice.buildUmlList(list);
+
 		request.setAttribute("logList", list);
+		request.setAttribute("imgSource", plantUml);
 		System.out.println("list size : " + list.size());
 
 		String url = "/template/trace.jsp";

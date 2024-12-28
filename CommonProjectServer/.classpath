@@ -9,5 +9,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/plantUMLServer-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/plantUMLServer-fixed.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

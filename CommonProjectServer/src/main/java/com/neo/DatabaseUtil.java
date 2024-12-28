@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import com.neo.plantUMLServer.dto.LogDTO;
 
 public class DatabaseUtil {
 
@@ -79,6 +80,7 @@ public class DatabaseUtil {
 				logDTO.setTimestmp(resultSet.getString("timestmp"));
 				logDTO.setTraceId(resultSet.getString("trace_id"));
 				logDTO.setUserId(resultSet.getString("user_id"));
+				logDTO.setLoggerName(resultSet.getString("logger_name"));
 				logDTO.setLevelString(resultSet.getString("level_string"));
 				logDTO.setCallerClass(resultSet.getString("caller_class"));
 				logDTO.setCallerMethod(resultSet.getString("caller_method"));		
