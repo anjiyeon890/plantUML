@@ -13,5 +13,5 @@
 ``` jar tf ../plantUMLServer-fixed.jar | grep TraceUmlService ```
 
 
-응답 예시 : com/neo/plantUMLServer/service/TraceUmlService.class
+응답 예시 : ```com/neo/plantUMLServer/service/TraceUmlService.class```
 
