@@ -1,4 +1,4 @@
-# 스프링 기반 PlantUML 프로젝트를 일반 jar 형식으로 재빌드 스크립트
+# 스프링 PlantUML 프로젝트 일반 jar 형식으로 재빌드
 
 ### BOOT-INF/classes/ 하위의 클래스 파일을 루트 디렉토리로 이동
 ``` mv BOOT-INF/classes/* . ```
